@@ -14,6 +14,12 @@
             <field name="view_mode">tree,form,calendar</field>
         </record>
 
+        <record model="ir.actions.act_window" id="participante_action_window">
+            <field name="name"> Participante </field>
+            <field name="res_model">competicion.participante</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
 
         <record model="ir.actions.act_window" id="pruebas_action_window">
             <field name="name"> Pruebas </field>
@@ -29,6 +35,7 @@
 
         <menuitem name="Propietario" id="propietario_menu" parent="competicion_menu_root" action="propietario_action_window"/>
         <menuitem name="Perros" id="perros_menu" parent="competicion_menu_root" action="dogs_action_window"/>
+        <menuitem name="Participante" id="participante_menu" parent="competicion_menu_root" action="participante_action_window"/>
         <menuitem name="Pruebas" id="pruebas_menu" parent="competicion_menu_root" action="pruebas_action_window"/>
 
         <!-- Vistas propietario-->
@@ -78,10 +85,10 @@
                 <tree>
                     <field name="name"/>
                     <field name="microchip"/>
-                    <field name="licencia"/>
                     <field name="fecha_nacimiento"/>
                     <field name="edad"/>
                     <field name="raza"/>
+                    <field name="propietario_id"/>
                 </tree>
             </field>
         </record>
@@ -100,11 +107,6 @@
                             <field name="fecha_nacimiento" placeholder="Fecha de nacimiento"/>
                         </group>
                         <group>
-                            <group>
-                                <separator string="Informacion de agility"/>
-                                <field name="licencia" placeholder="Numero de licencia"/>
-                            </group>
-
                             <group>
                                 <field name="edad"/>
                                 <field name="raza"/>
@@ -127,6 +129,42 @@
                 </calendar>
             </field>
         </record>
+
+
+
+        <!--Vista Participantes-->
+        <record model="ir.ui.view" id="participante_list_view">
+            <field name="name">competicion.participante.view.tree</field>
+            <field name="model">competicion.participante</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="licencia"/>
+                    <field name="dog_ids"/>
+                </tree>
+            </field>
+        </record>
+
+
+<!--
+        <record model="ir.ui.view" id="participante_form_view">
+            <field name="name">competicion.participante.view.form</field>
+            <field name="model">competicion.participante</field>
+            <field name="inherit_id" ref="propietario_form_view"/>
+            <field name="arch" type="xml">
+                <form string="Formulario del Participante">
+                    <sheet>
+                        <group>
+                            <xpath expr="//field[@name='name']" position="after">
+                                <separator string="Informacion Particpante"/>
+                                <field name="licencia" placeholder="Numero de licencia"/>
+                            </xpath>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        -->
 
         <!-- Vistas pruebas-->
 
